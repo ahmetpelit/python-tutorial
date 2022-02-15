@@ -1,0 +1,29 @@
+---
+applications:
+- name: myapp_from_desktop
+  routes:
+    - route: python-f7d5df18trial.cfapps.us10.hana.ondemand.com
+  path: ./
+  memory: 128M
+  buildpack:
+   https://github.com/cloudfoundry/python-buildpack.git
+  command: python server.py
+  services:
+    - pyhana
+    - pyuaa
+- name: web
+  routes:
+    - route: web-f7d5df18trial.cfapps.us10.hana.ondemand.com
+  path: web
+  memory: 128M
+  env:
+    destinations: >
+      [
+        {
+          "name":"myapp_from_desktop",
+          "url":"https://python-f7d5df18trial.cfapps.us10.hana.ondemand.com",
+          "forwardAuthToken": true
+        }
+      ]
+  services:
+    - pyuaa
