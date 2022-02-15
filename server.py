@@ -37,7 +37,7 @@ def hello():
     cursor.close()
     conn.close()
 
-    return "Current time is: " + str(ro["CURRENT_UTCTIMESTAMP"])
+    return ":') Current time is: " + str(ro["CURRENT_UTCTIMESTAMP"])
 
 
 if __name__ == '__main__':
